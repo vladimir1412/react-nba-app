@@ -9,7 +9,7 @@ class Player extends Component {
             players: [],
             error: false
         }
-        this.goBack = this.goBack.bind(this); 
+        this.goBack = this.goBack.bind(this);
     }
     componentWillMount() {
         const year = 2018;
@@ -25,7 +25,7 @@ class Player extends Component {
             .then(data => this.setState({ players: data.league.standard }))
             .catch(error => this.setState({ error }));
     }
-    
+
     goBack() {
         this.props.history.goBack();
     }
@@ -45,8 +45,8 @@ class Player extends Component {
                 <div className="row">
                     <div className="col-lg-3 col-md-3"></div>
                     <div className="col-lg-6 col-md-6">
-                        {playerProfile.map(player =>
-                            <div>
+                        {playerProfile.map((player, i) =>
+                            <div key={i}>
                                 <div className="card">
                                     <img className="card-img-top"
                                         src={`http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${player.personId}.png`} alt=""></img>
@@ -64,7 +64,7 @@ class Player extends Component {
                                         <li className="list-group-item">Last Affiliation: <b>{player.lastAffiliation}</b></li>
                                         <li className="list-group-item">Country: <b>{player.country}</b></li>
                                         <li className="list-group-item">
-                                            <button type="button" class="btn btn-info btn-sm" onClick={this.goBack}>Go Back</button>
+                                            <button type="button" className="btn btn-info btn-sm" onClick={this.goBack}>Go Back</button>
                                         </li>
                                     </ul>
                                 </div>
