@@ -3,26 +3,39 @@ import { BarLoader } from 'react-css-loaders';
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import './allPlayersLists.css'
+import './PlayersLists.css'
 
-class AllPlayersList extends Component {
+class PlayersList extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             players: [],
             teams: [],
-            season: "",
+            season: "2018",
             isLoading: false,
             error: false
         };
-        this.goToPlayerPage.bind(this);
-        this.displayTeamLogo.bind(this);
-        this.changeSeason.bind(this);
-        this.addTeamInfoToPlayer.bind(this);
+        this.goToPlayerPage = this.goToPlayerPage.bind(this);
+        this.displayTeamLogo = this.displayTeamLogo.bind(this);
+        this.changeSeason = this.changeSeason.bind(this);
+        this.addTeamInfoToPlayer = this.addTeamInfoToPlayer.bind(this);
+        this.getData = this.getData.bind(this);
     }
-    componentWillMount() {
-        const season = this.state.season || 2018;
+
+    componentDidMount() {
+        this.getData();
+    }
+
+    componentDidUpdate(nextProps, nextState) {
+        if (this.state.season !== nextState.season) {
+            this.setState({ players: [] });
+            this.getData();
+        }
+    }
+
+    getData() {
+        const season = this.state.season;
         const players = fetch(`http://data.nba.net/data/10s/prod/v1/${season}/players.json`).then(response => {
             return response.json()
         });
@@ -39,7 +52,7 @@ class AllPlayersList extends Component {
             combinedData["teams"] = values[1].league.standard;
             return this.setState({ players: combinedData["players"], teams: combinedData["teams"], isLoading: false });
         });
-    }
+    };
 
     goToPlayerPage(playerId) {
         return (<Link to={`/player/${playerId}`}>Player profile</Link>)
@@ -58,19 +71,15 @@ class AllPlayersList extends Component {
             width: '160px'
         }
         return (
-        <img style={imageSize}
-            src={`http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerId}.png`}
-            alt={playerId}></img>
+            <img style={imageSize}
+                src={`http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerId}.png`}
+                alt={playerId}></img>
         )
-    }
-
-    changeSeason(event) {
-        return this.setState({ season: event.target.value });
     }
 
     addTeamInfoToPlayer(teams, players) {
         return teams.filter(team => {
-          return players.filter(player => {
+            return players.filter(player => {
                 if (player.teamId === team.teamId) {
                     player["teamName"] = team.fullName;
                     player["tricode"] = team.tricode;
@@ -80,8 +89,13 @@ class AllPlayersList extends Component {
         })
     }
 
+    changeSeason(event) {
+        let year = event.target.value;
+        this.setState({ season: year });
+    }
+
     render() {
-        const { players, teams, isLoading, error } = this.state;
+        const { players, teams, isLoading, error, season } = this.state;
 
         if (error) return <p>{error.message}</p>;
 
@@ -91,11 +105,11 @@ class AllPlayersList extends Component {
 
         return (
             <div className="players-table sm-top-margin">
-                <select value={this.state.season} onChange={this.changeSeason}>
-                    <option value={2018}>2018</option>
-                    <option value={2017}>2017</option>
-                    <option value={2016}>2016</option>
-                    <option value={2015}>2015</option>
+                <select value={season} onChange={this.changeSeason}>
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
                 </select>
 
                 <BootstrapTable data={players} pagination search>
@@ -111,4 +125,4 @@ class AllPlayersList extends Component {
     }
 }
 
-export default AllPlayersList;
+export default PlayersList;
