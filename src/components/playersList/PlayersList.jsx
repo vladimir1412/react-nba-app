@@ -105,12 +105,16 @@ class PlayersList extends Component {
 
         return (
             <div className="players-table sm-top-margin">
-                <select value={season} onChange={this.changeSeason}>
-                    <option value="2018">2018</option>
-                    <option value="2017">2017</option>
-                    <option value="2016">2016</option>
-                    <option value="2015">2015</option>
-                </select>
+                <div className="season-selection col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                    <div className="form-group">
+                        <select className="form-control" value={season} onChange={this.changeSeason}>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                        </select>
+                    </div>
+                </div>
 
                 <BootstrapTable data={players} pagination search>
                     <TableHeaderColumn dataField="personId" dataFormat={this.displayPlayersPicture}>Players Picture</TableHeaderColumn>
