@@ -4,7 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import './index.css';
 import App from './App';
-import AllPlayersList from './components/AllPlayersList';
+import AllPlayersList from './components/playersList/AllPlayersList';
 import Teams from './components/team/Teams';
 import Player from './components/team/Player';
 import Header from './components/navigation/Header';
