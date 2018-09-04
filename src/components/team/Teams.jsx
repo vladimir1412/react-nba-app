@@ -46,8 +46,8 @@ class Teams extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    {nbaTeams.map(team =>
-                        <div key={team.teamId} className="col-lg-4 col-md-4 col-sm-6">
+                    {nbaTeams.map((team, i) =>
+                        <div key={i} className="col-lg-4 col-md-4 col-sm-6">
                             <div className="card sm-top-margin">
                                 <img className="card-img-top"
                                     src={`https://www.nba.com/assets/logos/teams/primary/web/${team.tricode}.svg`} alt={team.fullName} />
@@ -55,7 +55,7 @@ class Teams extends Component {
                                     <h4 className="text-center">Division: <b>{team.divName}</b></h4>
                                     <h5 className="card-title text-center"><b>{team.nickname}</b></h5>
                                     <div className="text-center">
-                                      <Link to={`/team/players/${team.teamId}`} className="btn btn-success" >{team.fullName}</Link>
+                                        <Link to={`/team/players/${team.teamId}`} className="btn btn-success" >{team.fullName}</Link>
                                     </div>
                                 </div>
                             </div>
