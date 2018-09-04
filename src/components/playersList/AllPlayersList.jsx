@@ -3,7 +3,7 @@ import { BarLoader } from 'react-css-loaders';
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-
+import './allPlayersLists.css'
 
 class AllPlayersList extends Component {
 
