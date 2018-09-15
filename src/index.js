@@ -8,7 +8,7 @@ import PlayersList from './components/playersList/PlayersList';
 import Teams from './components/team/Teams';
 import Player from './components/team/Player';
 import Header from './components/navigation/Header';
-import Footer from './components/navigation/Footer';
+import Footer from './components/footer/Footer';
 import TeamPlayersList from './components/team/TeamPlayersList';
 
 
