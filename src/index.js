@@ -4,11 +4,11 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import './index.css';
 import App from './App';
-import AllPlayersList from './components/playersList/AllPlayersList';
+import PlayersList from './components/playersList/PlayersList';
 import Teams from './components/team/Teams';
 import Player from './components/team/Player';
 import Header from './components/navigation/Header';
-import Footer from './components/navigation/Footer';
+import Footer from './components/footer/Footer';
 import TeamPlayersList from './components/team/TeamPlayersList';
 
 
@@ -20,7 +20,7 @@ ReactDOM.render(
             <Route path="/teams" component={Teams} />
             <Route path="/team/players/:teamId" component={TeamPlayersList} />
             <Route path="/player/:playerId" component={Player} />
-            <Route path="/players" component={AllPlayersList} />
+            <Route path="/players" component={PlayersList} />
             <Footer />
         </div>
     </BrowserRouter>

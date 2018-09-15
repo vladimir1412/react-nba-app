@@ -31,7 +31,7 @@ class TeamPlayersList extends Component {
             .then(data => this.setState({ teamPlayers: data.league.standard, isLoading: false }))
             .catch(error => this.setState({ error, isLoading: false }));
     }
-    
+
     render() {
         const { teamPlayers, isLoading, error } = this.state;
 
@@ -45,11 +45,10 @@ class TeamPlayersList extends Component {
         if (isLoading) return <BarLoader />;
 
         return (
-
             <div className="container">
                 <div className="row">
-                    {players.map(player =>
-                        <div key={player} className="col-lg-4 col-md-4 col-sm-6">
+                    {players.map((player, i) =>
+                        <div key={i} className="col-lg-4 col-md-4 col-sm-6">
                             <div className="card sm-top-margin">
                                 <img className="card-img-top"
                                     src={`http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${player.personId}.png`} alt=""></img>
@@ -60,7 +59,7 @@ class TeamPlayersList extends Component {
                                     <li className="list-group-item">Jersey: <b>{player.jersey}</b></li>
                                     <li className="list-group-item">Position: <b>{player.pos}</b></li>
                                     <li className="list-group-item">
-                                    <Link to={`/player/${player.personId}`} className="btn btn-success">Full Profile</Link>
+                                        <Link to={`/player/${player.personId}`} className="btn btn-success">Full Profile</Link>
                                     </li>
                                 </ul>
                             </div>
