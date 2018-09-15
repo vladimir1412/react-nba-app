@@ -1,5 +1,5 @@
 React Nba App
 
-Run npm install, to install all the modules. 
+Run <b>npm install</b>, when installation is finisher run <b>npm start</b>. 
 
-App should be visible at localhost:3000
+App should be visible at localhost:<b>3000</b>
